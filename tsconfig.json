@@ -6,7 +6,10 @@
     "outDir": "./dist",
     "strict": true,
     "jsx": "react",
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "types": [
+      "@testing-library/jest-dom"
+    ]
   },
   "include": ["src", "./src/setupTest.js"],
   "exclude": ["node_modules", "**/__tests__/*"]
