@@ -1,16 +1,16 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "module": "commonjs",
     "declaration": true,
+    "esModuleInterop": true,
+    "jsx": "react",
+    "module": "commonjs",
     "outDir": "./dist",
     "strict": true,
-    "jsx": "react",
-    "esModuleInterop": true,
+    "target": "es2015",
     "types": [
       "@testing-library/jest-dom"
     ]
   },
-  "include": ["src", "./src/setupTest.js"],
-  "exclude": ["node_modules", "**/__tests__/*"]
+  "include": ["src"],
+  "exclude": ["node_modules"]
 }
