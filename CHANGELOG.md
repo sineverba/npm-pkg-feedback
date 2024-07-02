@@ -1,5 +1,6 @@
 # Next version
 + Refactor repository
++ Upgrade dependencies
 
 ## 1.0.0
 + Upgrade dependencies
