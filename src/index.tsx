@@ -1,43 +1,45 @@
 import React from "react";
 
 /**
- * Feedback component properties.
+ * Interface for the properties of the Feedback component.
  */
 interface FeedbackProps {
   /**
-   * Message to be displayed in the feedback component.
-   * @default "Operazione eseguita con successo"
+   * The message to be displayed in the feedback component.
+   * @default "Operazione eseguita con successo" (Success message)
    */
   message?: string;
+
   /**
    * Indicates whether the feedback is an error message.
-   * @deprecated Use `level="error"` instead.
+   * @deprecated Use `level="error"` instead for better clarity.
    * @default false
    */
   isError?: boolean;
+
   /**
-   * Level of feedback message: "success", "warning", or "error".
-   * Determines the background color.
+   * The level of feedback message: "success", "warning", or "error".
+   * This determines the background color and the message style.
    * @default "success"
    */
   level?: string;
 }
 
 /**
- * Retrieves the appropriate message based on the feedback level.
+ * Retrieves the appropriate message based on the feedback level and error state.
  *
  * @param message - The message to be displayed.
- * @param isError - Indicates if the message is an error (deprecated).
- * @returns The appropriate message string based on the level.
+ * @param isError - Deprecated, previously indicated an error state.
+ * @returns The appropriate message string based on the level and error state.
  */
 const getMessage = (message: string, isError: boolean): string => {
   if (isError && message !== "Operazione eseguita con successo") {
-    return message;
+    return message; // Return the custom error message
   }
   if (isError && message === "Operazione eseguita con successo") {
-    return "Si è verificato un errore";
+    return "Si è verificato un errore"; // Default error message
   }
-  return message;
+  return message; // Return the normal message
 };
 
 /**
@@ -51,50 +53,54 @@ export const getBackgroundColor = (level: string): string => {
     case "warning":
       return "rgb(255, 193, 7)"; // Yellow background for warnings
     case "error":
-      return "rgb(248, 215, 218)"; // Red background for errors
+      return "rgb(248, 215, 218)"; // Light red background for errors
     default:
-      return "rgb(209, 231, 221)"; // Green background for success (default)
+      return "rgb(209, 231, 221)"; // Light green background for success (default)
   }
 };
 
 /**
- * Retrieves the appropriate text color based on the error state.
+ * Determines the text color based on the feedback level.
  *
- * @param isError - Indicates if the text color should reflect an error state (deprecated).
- * @returns The appropriate text color in RGB format.
- */
-const getColor = (isError: boolean): string => {
-  if (isError) {
-    return "rgb(88, 21, 28)"; // Dark red for errors
-  }
-  return "rgb(10, 54, 34)"; // Dark green for success
-};
-
-/**
- * Feedback component to display messages with different styles for success, warning, and error states.
- *
- * @param message - The message to be displayed.
  * @param level - The level of feedback ("success", "warning", or "error").
+ * @returns The corresponding text color in RGB format.
+ */
+export const getColor = (level: string): string => {
+  switch (level) {
+    case "warning":
+      return "rgb(204, 153, 0)"; // Dark yellow for warning messages
+    case "error":
+      return "rgb(88, 21, 28)"; // Dark red for error messages
+    default:
+      return "rgb(10, 54, 34)"; // Dark green for success messages
+  }
+};
+
+/**
+ * Feedback component to display styled messages with different levels: success, warning, and error.
+ *
+ * @param message - The message to be displayed in the feedback component.
+ * @param level - The level of feedback ("success", "warning", or "error").
+ * @returns A styled feedback message component.
  *
  * @example
  * <Feedback message="Data saved successfully" level="success" />
  * <Feedback message="Check your input" level="warning" />
  * <Feedback message="Failed to save data" level="error" />
- *
- * @returns A styled feedback message component.
  */
 export const Feedback: React.FC<FeedbackProps> = ({
-  message = "Operazione eseguita con successo",
-  isError = false, // Deprecated
-  level = "success"
+  message = "Operazione eseguita con successo", // Default success message
+  isError = false, // Deprecated, do not use
+  level = "success" // Default level is success
 }: FeedbackProps) => (
   <div
     style={{
-      backgroundColor: getBackgroundColor(level),
-      color: getColor(isError),
-      padding: "10px"
+      backgroundColor: getBackgroundColor(level), // Set background color based on level
+      color: getColor(level), // Set text color based on level
+      padding: "10px" // Padding for the feedback message
     }}
   >
-    <p>{getMessage(message, isError)}</p>
+    <p>{getMessage(message, isError)}</p>{" "}
+    {/* Display the appropriate message */}
   </div>
 );
