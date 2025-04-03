@@ -8,14 +8,7 @@ interface FeedbackProps {
    * The message to be displayed in the feedback component.
    * @default "Operazione eseguita con successo" (Success message)
    */
-  message?: string;
-
-  /**
-   * Indicates whether the feedback is an error message.
-   * @deprecated Use `level="error"` instead for better clarity.
-   * @default false
-   */
-  isError?: boolean;
+  message?: string | null;
 
   /**
    * The level of feedback message: "success", "warning", or "error".
@@ -26,20 +19,20 @@ interface FeedbackProps {
 }
 
 /**
- * Retrieves the appropriate message based on the feedback level and error state.
+ * Retrieves the appropriate message based on the feedback level.
  *
- * @param message - The message to be displayed.
- * @param isError - Deprecated, previously indicated an error state.
- * @returns The appropriate message string based on the level and error state.
+ * @param level - The level of feedback ("success", "warning", or "error").
+ * @param message - The message to be displayed (if provided).
+ * @returns The appropriate message string based on the feedback level.
  */
-const getMessage = (message: string, isError: boolean): string => {
-  if (isError && message !== "Operazione eseguita con successo") {
-    return message; // Return the custom error message
+export const getMessage = (level: string, message: null | string): string => {
+  switch (level) {
+    case "warning":
+    case "error":
+      return message ?? "si è verificato un errore"; // Default error message
+    default:
+      return message ?? "operazione eseguita con successo"; // Default success message
   }
-  if (isError && message === "Operazione eseguita con successo") {
-    return "Si è verificato un errore"; // Default error message
-  }
-  return message; // Return the normal message
 };
 
 /**
@@ -89,8 +82,7 @@ export const getColor = (level: string): string => {
  * <Feedback message="Failed to save data" level="error" />
  */
 export const Feedback: React.FC<FeedbackProps> = ({
-  message = "Operazione eseguita con successo", // Default success message
-  isError = false, // Deprecated, do not use
+  message = null, // Default success message
   level = "success" // Default level is success
 }: FeedbackProps) => (
   <div
@@ -100,7 +92,6 @@ export const Feedback: React.FC<FeedbackProps> = ({
       padding: "10px" // Padding for the feedback message
     }}
   >
-    <p>{getMessage(message, isError)}</p>{" "}
-    {/* Display the appropriate message */}
+    <p>{getMessage(level, message)}</p> {/* Display the appropriate message */}
   </div>
 );
