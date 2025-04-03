@@ -1,4 +1,4 @@
-# Next version
+# 2.0.0
 + Refactor repository
 + Upgrade dependencies
 + Add level to getBackgroundColor
