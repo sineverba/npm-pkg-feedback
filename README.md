@@ -29,12 +29,16 @@ export const App = () => {
     {/* It shows a success message "Operazione eseguita con successo" */}
     <Feedback message="great job!" />
     {/* It shows a success message "great job!" */}
-    <Feedback isError />
+    <Feedback level="error" />
     {/* It shows an error message "Si è verificato un errore" */}
-    <Feedback isError message="oh no!" />
+    <Feedback level="error" message="oh no!" />
     {/* It shows an error message "Oh no!" */}
+    <Feedback level="warning" />
+    {/* It shows a warning message with the default text */}
+    <Feedback level="warning" message="Attenzione!" />
+    {/* It shows a warning message "Attenzione!" */}
   )
-}:
+};
 
 export default App;
 ```
@@ -43,8 +47,8 @@ export default App;
 
 | Name | Type | Default value |
 | ---- | ---- | ------------- |
-| message | string | Operazione eseguita con successo (if `isError` is false) or Si è verificato un errore (if `isError` is true) |
-| isError | boolean | false |
+| message | string | "Operazione eseguita con successo" (if level is `success` or missing (default = success)) or "Si è verificato un errore" (if level is different from `success`) |
+| level | string | "success" (possible values: success | warning | error) |
 
 #### Tests
 
