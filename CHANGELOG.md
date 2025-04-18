@@ -1,4 +1,7 @@
-# 2.0.0
+# 2.0.1
++ Fix documentation
+
+## 2.0.0
 + Refactor repository
 + Upgrade dependencies
 + Add level to getBackgroundColor
