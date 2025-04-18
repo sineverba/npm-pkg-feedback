@@ -48,7 +48,7 @@ export default App;
 | Name | Type | Default value |
 | ---- | ---- | ------------- |
 | message | string | "Operazione eseguita con successo" (if level is `success` or missing (default = success)) or "Si è verificato un errore" (if level is different from `success`) |
-| level | string | "success" (possible values: success | warning | error) |
+| level | string | "success" (possible values: success / warning / error) |
 
 #### Tests
 
